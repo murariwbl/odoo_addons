@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+    <template id="template_product_details" name="Product Details PDF">
+        <t t-call="web.html_container">
+            <t t-call="web.external_layout">
+                <t t-foreach="docs" t-as="o">
+                    <div class="page">
+                        <div class="product-details-container" style="display: flex; align-items: flex-start;">
+
+                            <!-- Left: Product Image -->
+                            <div class="product-image" style="flex: 1; text-align: center; padding-right: 20px;">
+                                <t t-if="image">
+                                    <img t-att-src="image_data_uri(image)" class="img-fluid rounded mb-4"
+                                         style="max-width: 100%; height: auto;" alt="Product Image"/>
+                                </t>
+                            </div>
+
+                            <!-- Right: Product Details -->
+                            <div class="product-details" style="flex: 2;">
+                                <h2>
+                                    <t t-esc="name"/>
+                                </h2>
+                                <h3>
+                                    <t t-raw="currency_symbol"/>
+                                    <t t-esc="list_price"/>
+                                </h3>
+                                <p>
+                                    <strong>Description:</strong>
+                                    <t t-esc="description"/>
+                                </p>
+
+                                <!-- Product Attributes and Values -->
+                                <h4>Product Attributes:</h4>
+                                <table class="table table-condensed">
+                                    <t t-foreach="attributes" t-as="attr">
+                                        <tr>
+                                            <td>
+                                                <strong>
+                                                    <t t-esc="attr['attribute']"/>
+                                                </strong>
+                                            </td>
+                                            <td>
+                                                <t t-esc="attr['value']"/>
+                                            </td>
+                                        </tr>
+                                    </t>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>
+        <!--    <template id="wbl_website_product_pdf.template_product_details">-->
+        <!--        <t t-call="web.html_container">-->
+        <!--            <t t-call="web.external_layout">-->
+        <!--                <t t-call="website.layout">-->
+        <!--                    <div class="container mt-5">-->
+        <!--                        &lt;!&ndash;                <div class="row">&ndash;&gt;-->
+        <!--                        <table class="table table-condensed">-->
+        <!--                            <div class="col-md-4 text-center">-->
+        <!--                                <t t-if="image">-->
+        <!--                                    <img t-att-src="image_data_uri(product.image_1920)"-->
+        <!--                                         class="img-fluid o_image_1920 rounded mb-4"-->
+        <!--                                         style="max-width: 100%; height: auto;"/>-->
+        <!--                                </t>-->
+        <!--                            </div>-->
+        <!--                            <div class="col-md-8">-->
+        <!--                                <h2>-->
+        <!--                                    <t t-esc="name"/>-->
+        <!--                                </h2>-->
+        <!--                                <h3 class="mb-3">-->
+        <!--                                    <t t-raw="currency_symbol"/>-->
+        <!--                                    <t t-esc="list_price"/>-->
+        <!--                                </h3>-->
+        <!--                            </div>-->
+        <!--                        </table>-->
+        <!--                    </div>-->
+        <!--                </t>-->
+        <!--            </t>-->
+        <!--        </t>-->
+        <!--    </template>-->
+        <!--    ############-->

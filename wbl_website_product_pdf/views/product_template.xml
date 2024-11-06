@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--&lt;!&ndash;# Author      : Weblytic Labs Pvt. Ltd. (<https://store.weblyticlabs.com/>)>&#45;&#45;-->
+<!--&lt;!&ndash;# Copyright(c): 2023-Present Weblytic Labs Pvt. Ltd.&ndash;&gt;-->
+
+<odoo>
+    <template id="wbl_buy_again_info" inherit_id="website_sale.product">
+        <xpath expr="//div[@id='o_wsale_cta_wrapper']" position="after">
+
+            <div id="message_popup" class="modal fade" tabindex="-1">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header bg-primary text-white">
+                            <h5 class="modal-title w-100 text-center">Print Product PDF</h5>
+                        </div>
+                        <div class="modal-body">
+                            <form>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="selectAll"
+                                           name="selected_products"/>
+                                    <label class="form-check-label ms-4" for="selectAll">
+                                        Select All Options
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="productWithImage"
+                                           name="selected_product"/>
+                                    <label class="form-check-label ms-4" for="productWithImage">
+                                        Product With Image
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="productWithoutImage"
+                                           name="selected_products"/>
+                                    <label class="form-check-label ms-4" for="productWithPrice">
+                                        Product With Price
+                                    </label>
+                                </div>
+                            </form>
+                        </div>
+
+
+                        <div class="modal-footer">
+                            <button type="button" id="product_data_print"
+                                    class="btn btn-primary">
+                                <a t-attf-href="/product/details/pdf?product_id={{ product.id }}" class="text-white">
+                                    <i class="fa fa-print"></i>
+                                    Print
+                                </a>
+                            </button>
+                            <a t-attf-href="/product/details?product_id={{ product.id }}"
+                               class="btn btn-primary text-white">
+                                <i class="fa fa-eye"></i>
+                                View
+                            </a>
+
+
+<!--                            <button type="button" id="product_data_view"-->
+<!--                                    t-att-data-unit-price="product.list_price"-->
+<!--                                    t-att-data-product-id="product.id"-->
+<!--                                    t-att-data-product-name="product.name"-->
+<!--                                    class="btn btn-primary">-->
+<!--                                <a t-attf-href="/product/details?product_id={{ product.id }}" class="text-white">-->
+<!--                                    <i class="fa fa-eye"></i>-->
+<!--                                    View-->
+<!--                                </a>-->
+<!--                            </button>-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- this is the main button on which the form is popup-->
+            <button id="product_pdf_view"
+                    type="button"
+                    class="btn btn-primary mt-3">
+                PRODUCT PDF
+            </button>
+        </xpath>
+    </template>
+</odoo>
+

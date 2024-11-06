@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+    <template id="report_product">
+        <t t-call="web.html_container">
+            <t t-call="web.external_layout">
+
+                <!-- Page Title -->
+                <div class="page">
+                    <div class="text-center mb-4">
+                        <h2>PRODUCT DETAILS REPORT</h2>
+                    </div>
+
+                    <!-- Product Image and Basic Details -->
+                    <div class="row">
+                        <!-- Product Image on the left -->
+                        <div class="col-md-4 text-center">
+                            <t t-if="image">
+                                <img t-att-src="image_data_uri(product.image_1920)"
+                                     class="img-fluid img-thumbnail"
+                                     alt="Product Image"/>
+                            </t>
+                        </div>
+
+                        <!-- Product Name, Price, and Description on the right -->
+                        <div class="col-md-8">
+                            <h3>
+                                <t t-esc="name"/>
+                            </h3>
+                            <h4 class="text-muted">
+                                <t t-esc="currency_symbol"/>
+                                <t t-esc="list_price"/>
+                            </h4>
+                            <p>
+                                <strong>Description:</strong>
+                            </p>
+                            <p t-esc="description" class="text-justify"/>
+                        </div>
+                    </div>
+
+                    <!-- Product Attributes Section -->
+                    <div class="mt-4">
+                        <h4>Attributes</h4>
+
+                        <!-- Bootstrap Table for Attributes -->
+                        <table class="table table-bordered table-striped">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th>Attribute</th>
+                                    <th>Value</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-foreach="attributes" t-as="attr">
+                                    <tr>
+                                        <td>
+                                            <t t-esc="attr['attribute']"/>
+                                        </td>
+                                        <td>
+                                            <t t-esc="attr['value']"/>
+                                        </td>
+                                    </tr>
+                                </t>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </t>
+        </t>
+    </template>
+</odoo>
+        <!--<odoo>-->
+        <!--    <template id="report_product">-->
+        <!--        <t t-call="web.html_container">-->
+        <!--            <t t-call="web.external_layout">-->
+        <!--                <div class="page">-->
+        <!--                    <div class="oe_structure"/>-->
+        <!--                    <div style="text-align: center;">-->
+        <!--                        <h2>PRODUCT DETAILS REPORT</h2>-->
+        <!--                    </div>-->
+        <!--                    <br/>-->
+        <!--                    <table style="width: 100%; border-collapse: collapse; border: 1px solid black;">-->
+        <!--                        <thead>-->
+        <!--                            <tr style="background-color: #f2f2f2;">-->
+        <!--                                <th style="border: 1px solid black; padding: 8px; text-align: left;">Image</th>-->
+        <!--                                <th style="border: 1px solid black; padding: 8px; text-align: left;">Name</th>-->
+        <!--                                <th style="border: 1px solid black; padding: 8px; text-align: left;">List Price</th>-->
+        <!--                            </tr>-->
+        <!--                        </thead>-->
+        <!--                        <tbody>-->
+        <!--                            <tr>-->
+        <!--                                <td style="border: 1px solid black; padding: 8px;">-->
+        <!--                                    <t t-if="image">-->
+        <!--                                        <img t-att-src="image_data_uri(product.image_1920)"-->
+        <!--                                             style="max-width: 100px; height: auto;"/>-->
+        <!--                                    </t>-->
+        <!--                                </td>-->
+        <!--                                <td style="border: 1px solid black; padding: 8px;">-->
+        <!--                                    <span t-esc="name"/>-->
+        <!--                                </td>-->
+        <!--                                <td style="border: 1px solid black; padding: 8px;">-->
+        <!--                                    <span t-esc="currency_symbol"/>-->
+        <!--                                    <span t-esc="list_price"/>-->
+        <!--                                </td>-->
+        <!--                            </tr>-->
+        <!--                        </tbody>-->
+        <!--                    </table>-->
+        <!--                </div>-->
+        <!--            </t>-->
+        <!--        </t>-->
+        <!--    </template>-->
+        <!--</odoo>-->
