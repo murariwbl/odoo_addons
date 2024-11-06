@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--# Author      : Weblytic Labs Pvt. Ltd. (<https://store.weblyticlabs.com/>)-->
+<!--# Copyright(c): 2023-Present Weblytic Labs Pvt. Ltd.-->
+<odoo>
+    <data>
+        <!--        ####    THIS EMAIL WILL GO TO THE CUSTOMER  ############-->
+        <record id="rma_order_summary" model="mail.template">
+            <field name="name">RMA Order</field>
+            <field name="model_id" ref="wbl_return_merchandise_authorization.model_rma_order"/>
+            <field name="subject">RMA Order for {{ object.name }}</field>
+            <field name="email_from"/>
+            <field name="email_to">{{ object.create_uid.partner_id.email }}</field>
+            <field name="description">Notification of RMA Order Creation</field>
+            <field name="body_html" type="html">
+                <div>
+                    <div>
+                        <h2>RMA Order Created</h2>
+                    </div>
+                    <div>
+                        <p>Hey,</p>
+                        <p>Thank you! Your RMA Order has been created successfully.</p>
+                        <p>We will inform you once your order is verified.</p>
+                        <p>Best Regards</p>
+                    </div>
+                </div>
+            </field>
+        </record>
+    </data>
+
+    <data>
+        <!--        ####    THIS EMAIL WILL GO TO THE ADMIN  ############-->
+        <record id="rma_order_summary_to_admin" model="mail.template">
+            <field name="name">RMA Order To Admin</field>
+            <field name="model_id" ref="wbl_return_merchandise_authorization.model_rma_order"/>
+            <field name="subject">RMA Order To Admin  {{ object.name }}</field>
+            <field name="email_from"/>
+            <field name="email_to">{{ object.create_uid.partner_id.email }}</field>
+            <field name="description">Notification of RMA Order Creation</field>
+            <field name="body_html" type="html">
+                <div>
+                    <div>
+                        <h2>RMA Order Created</h2>
+                    </div>
+                    <div>
+                        <p>Hey,</p>
+                        <p>Thank you! The RMA Order has been created successfully.</p>
+                        <p>Best Regards</p>
+                    </div>
+                </div>
+            </field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,60 @@
+ /* popup form styling */
+ .form-label {
+        display: block; /* Ensures labels occupy the full width */
+        text-align: left; /* Aligns label text to the left */
+        font-weight: bold; /* Makes labels bold for better visibility */
+    }
+
+
+/* Center the modal title */
+    .modal-header {
+        display: flex;                /* Use flexbox for layout */
+        justify-content: center;      /* Center all header content */
+        width: 100%;                  /* Ensure it spans the full width */
+    }
+
+    .modal-body {
+        margin: 0;                   /* Remove default margin to center accurately */
+        text-align: center;           /* Center text within the title */
+    }
+
+    .custom-button {
+    font-size: 10px;
+    padding: 3px 8px; /* Adjust padding for a smaller box */
+    width: auto; /* Optional: Set width to auto for a more compact fit */
+    height: auto;/* Adjust this value to your desired font size */
+}
+
+/* change the colour of the state */
+   .state-draft {
+    background-color: royalblue; /* Blue for draft state */
+    color: white; /* White text for contrast */
+    padding: 5px 15px; /* More padding for a capsule shape */
+    border-radius: 20px; /* Rounder corners for capsule shape */
+    display: inline-block; /* Ensure the element is displayed inline */
+    font-weight: bold; /* Optional: Make text bold */
+}
+
+.state-done {
+    background-color: green; /* Green for done state */
+    color: white; /* White text for contrast */
+    padding: 5px 15px; /* More padding for a capsule shape */
+    border-radius: 20px; /* Rounder corners for capsule shape */
+    display: inline-block; /* Ensure the element is displayed inline */
+    font-weight: bold; /* Optional: Make text bold */
+}
+
+    /* resize the product image om main view return rma button on website */
+    .small-product-image {
+    width: 70px; /* Adjust width as needed */
+    height: 70px; /* Adjust height as needed */
+    object-fit: cover; /* Ensures the image fits well without distortion */
+}
+
+/* Adjust modal content padding */
+.modal-content {
+    padding: 10px; /* Further reduced padding for smaller modal size */
+}
+
+
+

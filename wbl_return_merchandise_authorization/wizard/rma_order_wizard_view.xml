@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--# Author      : Weblytic Labs Pvt. Ltd. (<https://store.weblyticlabs.com/>)-->
+<!--# Copyright(c): 2023-Present Weblytic Labs Pvt. Ltd.-->
+<odoo>
+    <record id="rma_order_wizard_popup_view_form" model="ir.ui.view">
+        <field name="name">rma.order.wizard.view.form</field>
+        <field name="model">rma.order.wizard</field>
+        <field name="priority" eval="8"/>
+        <field name="arch" type="xml">
+            <form string="Create RMA">
+                <group>
+                    <field name="sale_order_id"/>
+                </group>
+                <div>
+                    <field name="order_line_ids" nolabel="1">
+                        <tree string="Order Lines">
+                            <field name="product_id"/>
+                            <field name="product_uom_qty"/>
+                            <field name="price_unit"/>
+                            <field name="price_subtotal"/>
+                        </tree>
+                    </field>
+                </div>
+                <group>
+                    <group>
+                        <field name="reason_id"/>
+                    </group>
+                    <group>
+                        <field name="reason_type_id"/>
+                    </group>
+                </group>
+                <footer>
+                    <button name="action_create_rma_wizard" string="SUBMIT" type="object" class="oe_highlight"/>
+                    <button name="cancel" string="CANCEL" special="cancel" class="oe_highlight"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>
