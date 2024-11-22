@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_delivery_carrier_buttons" model="ir.ui.view">
+        <field name="name">delivery.carrier.form</field>
+        <field name="model">delivery.carrier</field>
+        <field name="inherit_id" ref="delivery.view_delivery_carrier_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='description']" position="after">
+                <page string="Quotation" name="Quotation">
+                    <group>
+                        <group>
+                            <field name="enable_quotation" />
+                            <field name="require_message_box" String="Require Message Text Box" invisible="not enable_quotation"/>
+                            <field name="button_name" invisible="not enable_quotation"/>
+                             <field name="message_show" invisible="not enable_quotation"/>
+                            <field name="custom_message" invisible="not enable_quotation or not message_show"/>
+                        </group>
+                        <group>
+                            <field name="quote_expire" invisible="not enable_quotation"/>
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>
