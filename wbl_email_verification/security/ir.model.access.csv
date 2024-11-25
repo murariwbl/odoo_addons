@@ -1,0 +1,7 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+
+access_mail_template,mail.template,model_mail_template,base.group_user,1,1,1,1
+access_mail_template_public_portal,mail.template public,model_mail_template,base.group_portal,1,1,1,1
+access_mail_template_public_employee,mail.template public,model_mail_template,base.group_user,1,1,1,1
+
+

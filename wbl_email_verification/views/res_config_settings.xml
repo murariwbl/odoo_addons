@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--&lt;!&ndash;# Author      : Weblytic Labs Pvt. Ltd. (<https://store.weblyticlabs.com/>)>&#45;&#45;-->
+<!--&lt;!&ndash;# Copyright(c): 2023-Present Weblytic Labs Pvt. Ltd.&ndash;&gt;-->
+
+<odoo>
+    <record id="es_settings_marque_form_view" model="ir.ui.view">
+        <field name="name">setting.marque.inherit</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="website.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//block[@id='website_info_settings']" position="after">
+                <div class="content-group">
+                    <block title="Email - Verification" id="website_email_settings">
+                        <div class="row mt2">
+                            <div class="col">
+                                <setting id="discount_sale_order_lines_1">
+                                    <field name="marque_notice"/>
+                                </setting>
+                                <setting id="discount_sale_order_lines_5">
+                                    <field name="hide_price"/>
+                                </setting>
+                                <setting id="discount_sale_order_lines_9">
+                                    <field name="hide_cart"/>
+                                </setting>
+                            </div>
+                            <setting>
+                                <div class="content-group">
+                                    <div class="row mt8">
+                                        <label class="col-lg-3" string="Bar Color" for="bar_color"/>
+                                        <field name="bar_color" widget="color"/>
+                                    </div>
+                                    <div class="row mt8">
+                                        <label class="col-lg-3" string="Text Color" for="text_color"/>
+                                        <field name="text_color" widget="color"/>
+                                    </div>
+                                    <div class="row mt8">
+                                        <label class="col-lg-3" string="Marque Text" for="marque_text"/>
+                                        <field name="marque_text"/>
+                                    </div>
+                                </div>
+                            </setting>
+                        </div>
+                    </block>
+                </div>
+            </xpath>
+        </field>
+    </record>
+</odoo>
