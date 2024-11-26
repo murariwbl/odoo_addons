@@ -8,17 +8,26 @@
                             <t t-set="breadcrumbs_searchbar" t-value="True"/>
                             <t t-call="portal.portal_searchbar">
                                 <br/>
-                                <li class="breadcrumb-item active">Shipping Quotation View</li>
+                                <li class="breadcrumb-item active">/ Shipping Quotation View</li>
                             </t>
                         </ol>
                     </nav>
                     <t t-if="quotation.status == 'open'">
-                        <div class="alert alert-warning" role="alert">
+                        <!--                        <div class="alert alert-warning" role="alert">-->
+                        <div class="alert alert-danger d-flex justify-content-center align-items-center" role="alert"
+                             style="height: 50px;">
                             Current Status Of This Quotation Is "Waiting".
                         </div>
                     </t>
-                    <t t-if="quotation.status == 'sent'">
-                        <div class="alert alert-success" role="alert">
+                    <t t-if="sale_order_exists">
+                        <div class="alert alert-info d-flex justify-content-center align-items-center" role="alert"
+                             style="height: 50px;">
+                            Sale Order Has Been Created For This "Quotation".
+                        </div>
+                    </t>
+                    <t t-elif="quotation.status == 'sent'">
+                        <div class="alert alert-success d-flex justify-content-center align-items-center" role="alert"
+                             style="height: 50px;">
                             Current Status Of This Quotation Is "Approved".
                         </div>
                     </t>
@@ -52,10 +61,6 @@
                                 <strong>Expired Date:</strong>
                                 <span t-esc="quotation.expired_date and quotation.expired_date.strftime('%Y-%m-%d')"/>
                             </p>
-                            <!--                            <p>-->
-                            <!--                                <strong>Message:</strong>-->
-                            <!--                                <span t-esc="quotation.message"/>-->
-                            <!--                            </p>-->
                         </div>
                         <!-- Customer Info Section -->
                         <div id="customer_info" class="col-md-6">
@@ -81,6 +86,7 @@
                         <table class="table table-sm">
                             <thead class="bg-100">
                                 <tr>
+                                    <th class="text-start">Product Image</th>
                                     <th class="text-start">Product Name</th>
                                     <th class="text-end">Quantity</th>
                                     <th class="text-end">Unit Price</th>
@@ -90,6 +96,23 @@
                             <tbody>
                                 <t t-foreach="product_lines" t-as="line">
                                     <tr>
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                <t t-if="line['image_128']">
+                                                    <img t-att-src="image_data_uri(line['image_128'])"
+                                                         class="img o_image_64_max rounded me-2"
+                                                         style="width: 50px; height: 50px;"/>
+                                                </t>
+                                                <t t-else="">
+                                                    <img class="img o_image_64_max rounded me-2"
+                                                         style="width: 64px; height: 64px;"
+                                                         src="/web/static/src/img/placeholder.png"/>
+                                                </t>
+                                            </div>
+                                        </td>
+                                        <!--                                        <td class="text-start">-->
+                                        <!--                                            <span t-esc="line['product_name']"/>-->
+                                        <!--                                        </td>-->
                                         <td class="text-start">
                                             <span t-esc="line['product_name']"/>
                                         </td>
@@ -102,7 +125,6 @@
                                         <td class="text-end">
                                             <span t-esc="'%s %.2f' % (currency_symbol, float(line['total']))"/>
                                         </td>
-
                                     </tr>
                                 </t>
                             </tbody>
@@ -129,38 +151,39 @@
                                         <td class="text-start">
                                             <span t-esc="'%s %.2f' % (currency_symbol, float(quotation['shipping_price']))"/>
                                         </td>
-
                                         <td class="text-start">
                                             <span t-esc="'%s %.2f' % (currency_symbol, float(subtotal))"/>
                                         </td>
-
                                     </tr>
                                 </tbody>
                             </table>
                         </div>
                     </div>
-                    <div class="container mb64 mt-3" t-if="quotation.status == 'sent'">
-                        <footer class="mt-5">
-                            <div class="d-flex justify-content-center">
-                                <form action="/shop/cart/update" method="POST">
-                                    <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
-                                    <input type="hidden" name="carrier_id" t-att-value="quotation.carrier_id"/>
-                                    <input type="hidden" name="quotation_id" t-att-value="quotation.id"/>
-                                    <t t-foreach="product_lines" t-as="line">
-                                        <input type="hidden" name="product_ids[]" t-att-value="line['product_id']"/>
-                                        <input type="hidden" name="quantities[]"
-                                               t-att-value="line['product_quantity']"/>
-                                    </t>
-                                    <button name="o_payment_submit_button" type="submit"
-                                            id="add_to_cart"
-                                            class="btn btn-primary btn-lg d-flex align-items-center">
-                                        <i class="fa fa-fw fa-shopping-cart"/>
-                                        Add to Cart
-                                    </button>
-                                </form>
-                            </div>
-                        </footer>
-                    </div>
+                    <t t-if="quotation.status == 'sent' and not sale_order_exists">
+                        <div class="container mb64 mt-3">
+                            <footer class="mt-5">
+                                <div class="d-flex justify-content-center">
+                                    <form action="/shop/cart/update" method="POST">
+                                        <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                                        <input type="hidden" name="carrier_id" t-att-value="quotation.carrier_id"/>
+                                        <input type="hidden" name="quotation_id" t-att-value="quotation.id"/>
+                                        <t t-foreach="product_lines" t-as="line">
+                                            <input type="hidden" id="wbl_cart_product_id" name="product_ids[]"
+                                                   t-att-value="line['product_id']"/>
+                                            <input type="hidden" id="wbl_cart_product_qty" name="quantities[]"
+                                                   t-att-value="line['product_quantity']"/>
+                                        </t>
+                                        <button name="o_payment_submit_button" type="submit"
+                                                id="wbl_add_to_cart"
+                                                class="btn btn-primary btn-lg d-flex align-items-center">
+                                            <i class="fa fa-fw fa-shopping-cart"/>
+                                            Add to Cart
+                                        </button>
+                                    </form>
+                                </div>
+                            </footer>
+                        </div>
+                    </t>
                 </div>
             </div>
         </t>

@@ -17,9 +17,10 @@
                             <field name="name" readonly="1"/>
                             <field name="customer_name" readonly="1"/>
                             <field name="customer_email" readonly="1"/>
-                            <field name="total" readonly="1"/>
+                            <field name="total" widget="monetary" readonly="1"/>
                             <field name="carrier" readonly="1"/>
                             <field name="currency_id" invisible="1"/>
+<!--                            <field name="shipping_price"  widget="monetary" readonly="status != 'sent'"/>-->
                             <field name="shipping_price"  widget="monetary"/>
                             <field name="Received_date" readonly="1"/>
                             <field name="expired_date" readonly="1"/>
@@ -54,7 +55,8 @@
                        decoration-success="status == 'sent'" decoration-warning="status == 'open'"/>
                 <field name="customer_name"/>
                 <field name="customer_email"/>
-                <field name="total"/>
+                <field name="currency_id" invisible="1"/>
+                <field name="total" widget="monetary"/>
                 <field name="carrier"/>
                 <field name="Received_date"/>
                 <field name="expired_date"/>

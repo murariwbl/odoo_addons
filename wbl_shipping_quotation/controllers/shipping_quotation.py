@@ -47,7 +47,7 @@ class CarrierQuotationController(http.Controller):
             'cart_id': str(order.id),
             'customer_name': order.partner_id.name,
             'customer_email': order.partner_id.email,
-            'total': total_with_currency_symbol,
+            'total': order.amount_total,
             'carrier': order.carrier_id.name if order.carrier_id else 'N/A',
             'shipping_price': delivery_charge,
             'Received_date': current_date,

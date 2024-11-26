@@ -1,5 +1,7 @@
 from odoo import http
 from odoo.http import request
+import re
+
 
 
 # THIS CONTROLLER IS USED FOR WHEN WE CLICK THE VIEW LOGO INSIDE THE ACCOUNT MANAGER OF SHIPPING COST
@@ -19,30 +21,59 @@ class PortalMyProductDetailsPdf(http.Controller):
         current_partner_id = request.env.user.partner_id.name
         print("==current_partner_id====", current_partner_id)
 
+        # Check if a sale order exists with this quotation_id
+        sale_order = request.env['sale.order'].sudo().search([('quotation_id', '=', quotation.id)], limit=1)
+        sale_order_exists = bool(sale_order)
+
+        # Check if order and currency_id exist
+        currency_symbol = quotation.currency_id.symbol
+        # Debugging the currency symbol
+        if not currency_symbol:
+            print("Currency symbol could not be determined from the order.")
+        else:
+            print(f"Currency symbol: {currency_symbol}")
+
         # Prepare product details
         product_lines = []
-        for product_line in quotation.product_ids:
-            # Remove currency symbol and convert to float
-            line_total = product_line.Total
-            if isinstance(line_total, str):  # Check if Total is a string
-                line_total = line_total.replace(order.currency_id.symbol, '').replace(',',
-                                                                                      '').strip()  # Remove currency symbol and commas
-            line_total = float(line_total or 0.0)
+        # currency_symbol = str(order.currency_id.symbol) if isinstance(order.currency_id.symbol, str) else ''
 
+        for product_line in quotation.product_ids:
+            # Ensure Total is a string
+            line_total = str(product_line.Total or '0')
+
+            # Clean line_total using regex to remove currency symbols and commas
+            try:
+                # Remove known currency symbol
+                if currency_symbol:
+                    line_total = line_total.replace(currency_symbol, '')
+
+                # Use regex to keep only numbers and the decimal point
+                line_total = re.sub(r'[^\d.]+', '', line_total)
+                print("Cleaned line_total:", line_total)
+
+                # Convert to float
+                line_total = float(line_total or 0.0)
+            except ValueError:
+                # Fallback to 0.0 if conversion fails
+                print(f"Invalid line_total format: {product_line.Total}")
+                line_total = 0.0
+
+            # Fetch the product image
+            product_image = product_line.product_id.image_128
+            print("====product_image====", product_image)
+
+            # Append cleaned data to product lines
             product_lines.append({
                 'product_id': product_line.product_id.id,
                 'product_name': product_line.product_id.name,
                 'unit_price': product_line.unit_price,
                 'product_quantity': product_line.product_quantity,
                 'total': line_total,
+                'image_128': product_image,
             })
-            # Debugging log
-            print("== Product Line ==")
-            print("Product ID:", product_line.product_id.id)
-            print("Product Name:", product_line.product_id)
-            print("Unit Price:", product_line.unit_price)
-            print("Product Quantity:", product_line.product_quantity)
-            print("Total:", product_line.Total)
+
+            # Debugging
+            print("Product:", product_line.product_id.name)
             print("Total (as float):", line_total)
             print("--------------------")
 
@@ -80,7 +111,8 @@ class PortalMyProductDetailsPdf(http.Controller):
             'product_lines': product_lines,  # Add product lines to the context
             'subtotal': subtotal,
             'total_products_amount': total_products_amount,
-            'currency_symbol': order.currency_id.symbol,
+            'currency_symbol': currency_symbol,
+            'sale_order_exists': sale_order_exists,  # Pass the existence flag
             # 'quotation_id': quotation.id,
         }
 

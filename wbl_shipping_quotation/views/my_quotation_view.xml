@@ -41,7 +41,7 @@
                                                 <span t-esc="detail['product_count']"/>
                                             </td>
                                             <td class="text-start">
-                                                <span t-esc="detail['total']"/>
+                                                <span t-esc="'%s %.2f' % (detail['currency_symbol'], detail['total'])"/>
                                             </td>
                                             <td class="text-start">
                                                 <span t-esc="detail['carrier']"/>

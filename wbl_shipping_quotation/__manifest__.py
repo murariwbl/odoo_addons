@@ -41,6 +41,7 @@
         'web.assets_frontend': [
             'wbl_shipping_quotation/static/src/js/shipping_form.js',
             'wbl_shipping_quotation/static/src/js/shipping_quotation.js',
+            # 'wbl_shipping_quotation/static/src/js/add_to_cart.js',
         ],
     },
 

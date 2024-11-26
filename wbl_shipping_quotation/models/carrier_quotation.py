@@ -14,7 +14,7 @@ class CarrierQuotation(models.Model):
         [('open', 'Open'), ('sent', 'Sent')], default='open', string="status")
     customer_name = fields.Char(string="Customer Name")
     customer_email = fields.Char(string="Customer Email")
-    total = fields.Char(string="Total")
+    total = fields.Float(string="Total")
     carrier = fields.Char(string="Carrier")
     currency_id = fields.Many2one('res.currency', string='Currency', required=True,
                                   default=lambda self: self.env.company.currency_id)
@@ -31,7 +31,7 @@ class CarrierQuotation(models.Model):
             record.status = 'sent'
         return True
 
-    #####  THIS IS CRON I HAVE USED THIS TO DELETE THE RECORD WHEN THE EXPIRATION DATE WILL PE PASS  #########
+    #####  THIS IS CRON I HAVE USED THIS TO DELETE THE RECORD WHEN THE EXPIRATION DATE WILL PASS  #########
     @api.model
     def delete_expired_quotations(self):
         print("ir cron function triggerd")
