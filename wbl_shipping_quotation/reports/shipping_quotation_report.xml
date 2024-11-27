@@ -110,9 +110,6 @@
                                                 </t>
                                             </div>
                                         </td>
-                                        <!--                                        <td class="text-start">-->
-                                        <!--                                            <span t-esc="line['product_name']"/>-->
-                                        <!--                                        </td>-->
                                         <td class="text-start">
                                             <span t-esc="line['product_name']"/>
                                         </td>

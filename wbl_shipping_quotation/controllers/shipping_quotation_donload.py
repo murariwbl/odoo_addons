@@ -3,17 +3,17 @@ from odoo.http import request
 import re
 
 
-# THIS CONTROLLER IS USED FOR WHEN WE CLICK THE VIEW LOGO INSIDE THE ACCOUNT MANAGER OF SHIPPING COST
+############### THIS CONTROLLER IS USED FOR WHEN WE CLICK THE DOWNLOAD LOGO INSIDE THE ACCOUNT MANAGER OF SHIPPING COST #########
 class PortalMyProductDetailsPdf(http.Controller):
 
     #########   THIS CONTROLLER HIT WHEN WE CLICK ON VIEW BUTTON INSIDE THE SHIPPING QUOTATION LIST ##############
-    @http.route(['/shipping/quotation/view'], type='http', auth='public', website=True)
-    def portal_my_product_details_view(self, **kw):
+    @http.route(['/shipping/quotation/download'], type='http', auth='public', website=True)
+    def portal_my_product_details_pdf(self, **kw):
+        print("=======download button clicked")
         # Get the quotation_id from the URL parameters
         order = request.website.sale_get_order()
-        print("ttttttt",order.order_line)
+        print(order.order_line)
         quotation_id = kw.get('quotation_id')
-        print("=======View button clicked")
         print("=======Quotation ID:", quotation_id)
 
         # Fetch the quotation record from the database using the quotation ID
@@ -58,24 +58,24 @@ class PortalMyProductDetailsPdf(http.Controller):
                 print(f"Invalid line_total format: {product_line.Total}")
                 line_total = 0.0
 
-            # Fetch the product image
-            product_image = product_line.product_id.image_128
-            print("====product_image====", product_image)
+        # Fetch the product image
+        product_image = product_line.product_id.image_128
+        print("====product_image====", product_image)
 
-            # Append cleaned data to product lines
-            product_lines.append({
-                'product_id': product_line.product_id.id,
-                'product_name': product_line.product_id.name,
-                'unit_price': product_line.unit_price,
-                'product_quantity': product_line.product_quantity,
-                'total': line_total,
-                'image_128': product_image,
-            })
+        # Append cleaned data to product lines
+        product_lines.append({
+            'product_id': product_line.product_id.id,
+            'product_name': product_line.product_id.name,
+            'unit_price': product_line.unit_price,
+            'product_quantity': product_line.product_quantity,
+            'total': line_total,
+            'image_128': product_image,
+        })
 
-            # Debugging
-            print("Product:", product_line.product_id.name)
-            print("Total (as float):", line_total)
-            print("--------------------")
+        # Debugging
+        print("Product:", product_line.product_id.name)
+        print("Total (as float):", line_total)
+        print("--------------------")
 
         # Access partner details
         partner_name = request.env.user.partner_id.name
@@ -113,12 +113,19 @@ class PortalMyProductDetailsPdf(http.Controller):
             'total_products_amount': total_products_amount,
             'currency_symbol': currency_symbol,
             'sale_order_exists': sale_order_exists,  # Pass the existence flag
-            # 'quotation_id': quotation.id,
         }
+        print("============values", values)
+        # Render the PDF
+        report_service = request.env['ir.actions.report']
+        pdf_content, _ = report_service._render_qweb_pdf(
+            'wbl_shipping_quotation.action_report_shipping_quotation_pdf', [], values
+        )
 
-        # Clear the cart after rendering the quotation details
-        if order:
-            order._clear_cart()
-            print("Cart cleared successfully.")
+        # Create a response to download the PDF
+        response = request.make_response(pdf_content, headers=[
+            ('Content-Type', 'application/pdf'),
+            ('Content-Disposition', f'attachment; filename="{quotation.name}_quotation_details.pdf"'),
 
-        return request.render('wbl_shipping_quotation.template_quotation_details', values)
+        ])
+
+        return response

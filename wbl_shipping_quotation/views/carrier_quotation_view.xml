@@ -20,8 +20,8 @@
                             <field name="total" widget="monetary" readonly="1"/>
                             <field name="carrier" readonly="1"/>
                             <field name="currency_id" invisible="1"/>
-<!--                            <field name="shipping_price"  widget="monetary" readonly="status != 'sent'"/>-->
-                            <field name="shipping_price"  widget="monetary"/>
+                            <field name="shipping_price"  widget="monetary" readonly="status != 'open'"/>
+<!--                            <field name="shipping_price"  widget="monetary"/>-->
                             <field name="Received_date" readonly="1"/>
                             <field name="expired_date" readonly="1"/>
 <!--                            <field name="message" readonly="1"/>-->

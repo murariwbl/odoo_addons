@@ -10,7 +10,7 @@
                     <group>
                         <group>
                             <field name="enable_quotation" />
-                            <field name="require_message_box" String="Require Message Text Box" invisible="not enable_quotation"/>
+<!--                            <field name="require_message_box" String="Require Message Text Box" invisible="not enable_quotation"/>-->
                             <field name="button_name" invisible="not enable_quotation"/>
                              <field name="message_show" invisible="not enable_quotation"/>
                             <field name="custom_message" invisible="not enable_quotation or not message_show"/>

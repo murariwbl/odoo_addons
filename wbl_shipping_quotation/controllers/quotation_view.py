@@ -29,7 +29,7 @@ class MyPortalRmaController(http.Controller):
                 formatted_expired_date = None
 
             # print(f"Expired Date: {formatted_expired_date}, Today's Date: {today_date}")
-            print("dfdfdfdfd========",quotation.currency_id.symbol)
+            # print("dfdfdfdfd========",quotation.currency_id.symbol)
 
             data = {
                 'name': quotation.name,

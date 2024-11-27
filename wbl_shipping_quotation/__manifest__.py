@@ -35,13 +35,14 @@
         'views/menus_view.xml',
         'views/ir_cron_action.xml',
         'reports/shipping_quotation_report.xml',
+        'reports/action_shipping_quotation_report_don.xml',
+        'reports/shipping_quotation_report_donload.xml',
     ],
 
     'assets': {
         'web.assets_frontend': [
             'wbl_shipping_quotation/static/src/js/shipping_form.js',
             'wbl_shipping_quotation/static/src/js/shipping_quotation.js',
-            # 'wbl_shipping_quotation/static/src/js/add_to_cart.js',
         ],
     },
 

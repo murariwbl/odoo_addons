@@ -21,14 +21,15 @@
                             <table class="table rounded mb-0 bg-white o_portal_my_doc_table">
                                 <thead>
                                     <tr class="active">
-                                        <th scope="col">Id</th>
+                                        <th scope="col">Reference</th>
                                         <th scope="col">Products</th>
                                         <th scope="col">Total</th>
                                         <th scope="col">Carrier</th>
                                         <th scope="col">Status</th>
                                         <th scope="col">Received Date</th>
                                         <th scope="col">Expire Date</th>
-                                        <th scope="col">Action</th>
+                                        <th scope="col" style="text-align: left;">View</th>
+                                        <th scope="col" style="text-align: left;">Download</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -63,18 +64,20 @@
                                                 <span t-esc="detail['expired_date']"/>
                                             </td>
                                             <td class="text-start">
-                                                <!--                                                <button type="button" id="shipping_quotation_data_print"-->
-                                                <!--                                                        class="oe_unremovable btn btn-primary btn_cta">-->
-                                                <!--                                                    <a t-attf-href="/shipping/quotation/pdf" class="text-white"-->
-                                                <!--                                                       title="Download PDF">-->
-                                                <!--                                                        <i class="fa fa-print"></i>-->
-                                                <!--                                                    </a>-->
-                                                <!--                                                </button>-->
                                                 <button type="button" id="shipping_quotation_data_view"
                                                         class="oe_unremovable btn btn-primary btn_cta">
                                                     <a t-attf-href="/shipping/quotation/view?quotation_id={{ detail['name'] }}"
                                                        class="text-white" title="VIEW">
                                                         <i class="fa fa-eye"></i>
+                                                    </a>
+                                                </button>
+                                            </td>
+                                            <td class="text-start">
+                                                <button type="button" id="shipping_quotation_data_view"
+                                                        class="oe_unremovable btn btn-primary btn_cta">
+                                                    <a t-attf-href="/shipping/quotation/download?quotation_id={{ detail['name'] }}"
+                                                       class="text-white" title="VIEW">
+                                                        <i class="fa fa-download"></i>
                                                     </a>
                                                 </button>
                                             </td>

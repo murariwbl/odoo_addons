@@ -46,26 +46,3 @@ class CarrierQuotation(models.Model):
             expired_quotations.unlink()
         else:
             _logger.info("No expired quotations found.")
-
-    # # Updating the price  #########
-    # @api.model
-    # def create(self, vals):
-    #     record = super(CarrierQuotation, self).create(vals)
-    #     record._update_carrier_price()
-    #     return record
-    #
-    # def write(self, vals):
-    #     res = super(CarrierQuotation, self).write(vals)
-    #     self._update_carrier_price()
-    #     return res
-    #
-    # def _update_carrier_price(self):
-    #     """Update the `lst_price` of the product linked to the carrier."""
-    #     for record in self:
-    #         if record.carrier_id and record.carrier_id.product_id:
-    #             product = record.carrier_id.product_id
-    #             if product:
-    #                 # Update lst_price with the value of shipping_price
-    #                 product.lst_price = record.shipping_price
-    #                 # Log the update for debugging
-    #                 _logger.info("Updated lst_price of product '%s' to %s", product.name, record.shipping_price)
