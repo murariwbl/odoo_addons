@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- # Author      : Weblytic Labs Pvt. Ltd. (<https://store.weblyticlabs.com/>) -->
+<!-- # Copyright(c): 2023-Present Weblytic Labs Pvt. Ltd. -->
+
+<odoo>
+    <template id="custom_button_after_cart" inherit_id="website.layout">
+        <xpath expr="//div[@id='o_main_nav']" position="inside">
+            <!--                <xpath expr="//div[hasclass('caption')]/a" position="replace">-->
+            <!--        <xpath expr="//div[hasclass('products_header')]" position="inside">-->
+            <!-- Modal Structure -->
+            <div id="message_popup" class="modal fade" tabindex="-1">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">PDF Catalog Options</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+
+                        <!-- Modal Footer with Action Buttons -->
+                        <div class="modal-footer">
+                            <button type="button" id="product_category_data_print"
+                                    class="oe_unremovable btn btn-primary btn_cta">
+                                <a t-attf-href="/product/details/category/pdf" class="text-white"
+                                   title="Click To Download The PDF">
+                                    <i class="fa fa-print"></i>
+                                    Catalog PDF Button
+                                </a>
+                            </button>
+                            <button type="button" id="product_category_data_view"
+                                    class="oe_unremovable btn btn-primary btn_cta">
+                                <a t-attf-href="/product/details/category/pdf/view"
+                                   class="text-white" title="Click To View PDF Without Download">
+                                    <i class="fa fa-eye"></i>
+                                    Click To View
+                                </a>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main Button for PDF View -->
+            <t t-set="enable_pdf" t-value="env['res.config.settings'].sudo().get_values().get('enable_pdf')"/>
+            <t t-if="enable_pdf">
+                <button id="main_button_pdf_view" type="button" class="oe_unremovable btn btn-primary btn_cta"
+                        style="margin-left: 15px;">
+                    <i class="fa fa-print"></i>
+                    CATALOG PDF
+                </button>
+            </t>
+        </xpath>
+    </template>
+
+</odoo>
