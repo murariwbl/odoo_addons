@@ -1,3 +1,16 @@
+# -*- coding: utf-8 -*-
+#
+#################################################################################
+# Author      : Weblytic Labs Pvt. Ltd. (<https://store.weblyticlabs.com/>)
+# Copyright(c): 2023-Present Weblytic Labs Pvt. Ltd.
+# All Rights Reserved.
+#
+#
+# This program is copyright property of the author mentioned above.
+# You can`t redistribute it and/or modify it.
+##################################################################################
+
+
 from odoo import api, fields, models
 import logging
 
@@ -11,9 +24,18 @@ class DeliveryCarrier(models.Model):
     require_message_box = fields.Boolean(String="Require Message Text Box")
     button_name = fields.Char(String="Button Name")
     message_show = fields.Boolean(String="Show Message Text Box")
-    custom_message = fields.Text(String="Custom Message")
+    custom_message = fields.Html(String="Custom Message")
     quote_expire = fields.Integer(string="Quote Expire After (days)",
                                   help="Number of days after which the quote expires")
+    currency_id = fields.Many2one('res.currency', required=True,
+                                  default=lambda self: self.env.company.currency_id)
+    minimum_order_amount = fields.Float(string="Minimum Order Amount")
+    is_tax_include = fields.Boolean(string="Tax Exclude")
+    product_ids = fields.Many2many('product.product', String="Products")
+    date_from = fields.Date(String="From")
+    date_to = fields.Date(String="To")
+    customer_ids = fields.Many2many('res.partner', string="Customers")
+    select_country = fields.Many2many('res.country', string="Country")
 
     def rate_shipment(self, order):
         # Call the super method to get the default response

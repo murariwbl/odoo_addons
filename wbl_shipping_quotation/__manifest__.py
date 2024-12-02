@@ -27,6 +27,7 @@
 
     'data': [
         'security/ir.model.access.csv',
+        'data/delivey_quote_email_template.xml',
         'views/delivery_carier_view.xml',
         'views/delivery_form_template.xml',
         'views/carrier_quotation_view.xml',
@@ -34,6 +35,7 @@
         'views/my_quotation_view.xml',
         'views/menus_view.xml',
         'views/ir_cron_action.xml',
+        'views/ir_sequence.xml',
         'reports/shipping_quotation_report.xml',
         'reports/action_shipping_quotation_report_don.xml',
         'reports/shipping_quotation_report_donload.xml',

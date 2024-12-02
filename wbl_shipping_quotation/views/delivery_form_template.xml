@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- # Author      : Weblytic Labs Pvt. Ltd. (<https://store.weblyticlabs.com/>) -->
+<!-- # Copyright(c): 2023-Present Weblytic Labs Pvt. Ltd. -->
+
+
+<odoo>
+    <template id="custom_quotation_setting" inherit_id="website_sale.delivery_form">
+        <xpath expr="//form[@id='o_delivery_form']" position="after">
+            <div id="custom_message">
+            </div>
+            <br></br>
+            <div id="require_message_box" class="form-group" style="display:none;">
+                <label for="text_message" class="fw-bold">TEXT MESSAGE</label>
+                <textarea class="form-control" id="text_message" name="text_message" rows="2"></textarea>
+            </div>
+            <button id="product_pdf_view" style="display:none;" type="button" class="btn btn-primary mt-3">
+                GET BACK TO ME WITH SHIPPING PRICE
+            </button>
+        </xpath>
+    </template>
+</odoo>

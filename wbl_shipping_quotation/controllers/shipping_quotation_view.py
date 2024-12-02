@@ -1,9 +1,20 @@
+# -*- coding: utf-8 -*-
+#
+#################################################################################
+# Author      : Weblytic Labs Pvt. Ltd. (<https://store.weblyticlabs.com/>)
+# Copyright(c): 2023-Present Weblytic Labs Pvt. Ltd.
+# All Rights Reserved.
+#
+#
+# This program is copyright property of the author mentioned above.
+# You can`t redistribute it and/or modify it.
+##################################################################################
+
 from odoo import http
 from odoo.http import request
 import re
 
 
-# THIS CONTROLLER IS USED FOR WHEN WE CLICK THE VIEW LOGO INSIDE THE ACCOUNT MANAGER OF SHIPPING COST
 class PortalMyProductDetailsPdf(http.Controller):
 
     #########   THIS CONTROLLER HIT WHEN WE CLICK ON VIEW BUTTON INSIDE THE SHIPPING QUOTATION LIST ##############
@@ -11,15 +22,11 @@ class PortalMyProductDetailsPdf(http.Controller):
     def portal_my_product_details_view(self, **kw):
         # Get the quotation_id from the URL parameters
         order = request.website.sale_get_order()
-        print("ttttttt",order.order_line)
         quotation_id = kw.get('quotation_id')
-        print("=======View button clicked")
-        print("=======Quotation ID:", quotation_id)
 
         # Fetch the quotation record from the database using the quotation ID
         quotation = request.env['carrier.quotation'].sudo().search([('name', '=', quotation_id)], limit=1)
         current_partner_id = request.env.user.partner_id.name
-        print("==current_partner_id====", current_partner_id)
 
         # Check if a sale order exists with this quotation_id
         sale_order = request.env['sale.order'].sudo().search([('quotation_id', '=', quotation.id)], limit=1)
@@ -35,7 +42,6 @@ class PortalMyProductDetailsPdf(http.Controller):
 
         # Prepare product details
         product_lines = []
-        # currency_symbol = str(order.currency_id.symbol) if isinstance(order.currency_id.symbol, str) else ''
 
         for product_line in quotation.product_ids:
             # Ensure Total is a string
@@ -49,18 +55,15 @@ class PortalMyProductDetailsPdf(http.Controller):
 
                 # Use regex to keep only numbers and the decimal point
                 line_total = re.sub(r'[^\d.]+', '', line_total)
-                print("Cleaned line_total:", line_total)
 
                 # Convert to float
                 line_total = float(line_total or 0.0)
             except ValueError:
                 # Fallback to 0.0 if conversion fails
-                print(f"Invalid line_total format: {product_line.Total}")
                 line_total = 0.0
 
             # Fetch the product image
             product_image = product_line.product_id.image_128
-            print("====product_image====", product_image)
 
             # Append cleaned data to product lines
             product_lines.append({
@@ -72,11 +75,6 @@ class PortalMyProductDetailsPdf(http.Controller):
                 'image_128': product_image,
             })
 
-            # Debugging
-            print("Product:", product_line.product_id.name)
-            print("Total (as float):", line_total)
-            print("--------------------")
-
         # Access partner details
         partner_name = request.env.user.partner_id.name
         partner_address = request.env.user.partner_id.contact_address  # Assuming 'contact_address' is a field
@@ -87,11 +85,6 @@ class PortalMyProductDetailsPdf(http.Controller):
         total_products_amount = sum(float(line['total']) for line in product_lines)
         shipping_price = float(quotation.shipping_price or 0.0)
         subtotal = total_products_amount + shipping_price
-        print("====subtotal", subtotal)
-
-        print("Product Lines:", product_lines)
-        print("Quotation Status:", quotation.status)
-        print("Quotation ID:", quotation.id)
 
         values = {
             'quotation': quotation,
@@ -113,12 +106,10 @@ class PortalMyProductDetailsPdf(http.Controller):
             'total_products_amount': total_products_amount,
             'currency_symbol': currency_symbol,
             'sale_order_exists': sale_order_exists,  # Pass the existence flag
-            # 'quotation_id': quotation.id,
         }
 
         # Clear the cart after rendering the quotation details
         if order:
             order._clear_cart()
-            print("Cart cleared successfully.")
 
         return request.render('wbl_shipping_quotation.template_quotation_details', values)

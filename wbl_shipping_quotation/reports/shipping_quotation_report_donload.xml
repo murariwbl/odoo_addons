@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- # Author      : Weblytic Labs Pvt. Ltd. (<https://store.weblyticlabs.com/>) -->
+<!-- # Copyright(c): 2023-Present Weblytic Labs Pvt. Ltd. -->
 
 <odoo>
     <template id="report_shipping_quotation_pdf">
@@ -19,7 +21,7 @@
                                 <div class="alert alert-info d-flex justify-content-center align-items-center"
                                      role="alert"
                                      style="height: 50px;">
-                                    Sale Order Has Been Created For This "Quotation".
+                                    Sale order has been created for this "Quotation".
                                 </div>
                             </t>
                             <t t-elif="quotation.status == 'sent'">
