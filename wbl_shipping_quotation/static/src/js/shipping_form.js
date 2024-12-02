@@ -24,26 +24,21 @@ publicWidget.registry.websiteSaleDeliveryTimeSlot = publicWidget.Widget.extend({
 
          // Update the shipping price display
         const shippingPriceDiv = document.getElementById('shipping_price');
-          console.log(shippingPriceDiv);
             if (shippingPriceDiv && result.shipping_price) {
                 shippingPriceDiv.textContent = `Shipping Price: ${result.shipping_price.toFixed(2)}`;
                 shippingPriceDiv.style.display = 'block';
-                console.log('hello');
             } else if (shippingPriceDiv) {
                 shippingPriceDiv.style.display = 'none';
             }
 
         // Toggle the message box display
-        const messageBox = document.getElementById('require_message_box');
         const textMessage = document.getElementById('text_message');
         const continueButton = document.querySelector('a[name="website_sale_main_button"]');
 
         // Handle the visibility of the message box  and text message
-        if (result.require_message_box && result.enable_quotation && result.shipping_quotation === false) {
-            messageBox.style.display = 'block';
+        if (result.enable_quotation && result.shipping_quotation === false) {
             textMessage.setAttribute('required', 'required');  // Make text area required
         } else {
-            messageBox.style.display = 'none';
             textMessage.removeAttribute('required');  // Remove required attribute
         }
 
@@ -58,19 +53,16 @@ publicWidget.registry.websiteSaleDeliveryTimeSlot = publicWidget.Widget.extend({
         const customMessageDiv = document.getElementById('custom_message');
         const button = document.getElementById('product_pdf_view');
 
-        if (result.message_show && result.custom_message && result.enable_quotation && result.shipping_quotation === false ) {
-            console.log('if')
-            customMessageDiv.textContent = result.custom_message;
+        if (result.message_show && result.custom_message && result.enable_quotation && result.shipping_quotation === false) {
+            customMessageDiv.innerHTML = result.custom_message;  // Use innerHTML to render HTML content
             customMessageDiv.style.display = 'block';
         } else {
-            console.log('else')
             customMessageDiv.style.display = 'none';
-
         }
 
-         // Set button name, and show/hide button based on `enable_quotation`
 
-        if (result.enable_quotation && result.shipping_quotation === false) {
+         // Set button name, and show/hide button based on `enable_quotation`
+        if (result.enable_quotation && result.shipping_quotation === false && result.conditions_matched) {
             button.textContent = result.button_name ? result.button_name.toUpperCase() : 'GET BACK TO ME WITH SHIPPING PRICE';
             button.style.display = 'block';  // Show the button
         } else {

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- # Author      : Weblytic Labs Pvt. Ltd. (<https://store.weblyticlabs.com/>) -->
+<!-- # Copyright(c): 2023-Present Weblytic Labs Pvt. Ltd. -->
+
+<odoo>
+    <record id="action_report_shipping_quotation_pdf" model="ir.actions.report">
+        <field name="name">Shipping Quotation</field>
+        <field name="model">carrier.quotation</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">wbl_shipping_quotation.report_shipping_quotation_pdf</field>
+        <field name="report_file">wbl_shipping_quotation.report_shipping_quotation_pdf</field>
+        <field name="binding_type">report</field>
+    </record>
+</odoo>

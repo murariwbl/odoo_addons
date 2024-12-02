@@ -1,0 +1,11 @@
+<odoo>
+    <data noupdate="1">
+        <record id="seq_quotation_id" model="ir.sequence">
+            <field name="name">Carrier Quotation ID</field>
+            <field name="code">carrier.quotation</field>
+            <field name="prefix">QUE-</field>
+            <field name="padding">4</field> <!-- Ensures IDs like 0001, 0002 -->
+            <field name="implementation">no_gap</field>
+        </record>
+    </data>
+</odoo>

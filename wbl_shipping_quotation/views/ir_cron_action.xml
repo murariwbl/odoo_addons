@@ -1,3 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- # Author      : Weblytic Labs Pvt. Ltd. (<https://store.weblyticlabs.com/>) -->
+<!-- # Copyright(c): 2023-Present Weblytic Labs Pvt. Ltd. -->
+
 <odoo>
     <data noupdate="1">
         <!-- Create a cron job to delete expired quotations daily -->

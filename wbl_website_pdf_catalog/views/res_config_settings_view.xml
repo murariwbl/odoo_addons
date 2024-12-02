@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- # Author      : Weblytic Labs Pvt. Ltd. (<https://store.weblyticlabs.com/>) -->
+<!-- # Copyright(c): 2023-Present Weblytic Labs Pvt. Ltd. -->
+
+<odoo>
+    <record id="es_settings_product_form_view" model="ir.ui.view">
+        <field name="name">setting.product.Pdf.inherit</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="website.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//block[@id='website_info_settings']" position="after">
+                <div class="content-group">
+                    <block title="PDF Catalog Configurations" id="website_product_pdf">
+                        <div class="row mt2">
+                            <div class="col-lg-6">
+                                <setting help="Allow To Enable PDF Catalog">
+                                    <field name="enable_pdf" string="Enable PDF Catalog"/>
+                                </setting>
+                                <setting help="Allow To Enable PDF On Product Page" invisible="not enable_pdf">
+                                    <field name="enable_pdf_product" string="PDF Button On Product Page"/>
+                                </setting>
+                                <setting invisible="not enable_pdf">
+                                    <div class="row mt8">
+                                        <label class="col-lg-3" string="Cover Image" for="cover_image"/>
+                                        <field name="cover_image" widget="image" class="oe_avatar"/>
+                                    </div>
+                                </setting>
+                                <setting invisible="not enable_pdf" help="Allow to Enable Date On PDF">
+                                    <field name="display_date" string="Enable Display Date"/>
+                                </setting>
+
+                                <setting invisible="not enable_pdf">
+                                    <label string="Filter Based On Category" for="category_ids"/>
+                                    <field name="category_ids" widget="many2many_tags"/>
+                                </setting>
+                            </div>
+                            <!--                            ###########33-->
+                            <div class="col-lg-6">
+                                <setting help="Allow To Enable Logo" invisible="not enable_pdf">
+                                    <field name="enable_logo" string="Enable Logo"/>
+                                </setting>
+                                <setting invisible="not enable_pdf or not enable_logo">
+                                    <label string="Logo Position" for="logo_position"/>
+                                    <field name="logo_position"/>
+                                </setting>
+                                <setting invisible="not enable_pdf or not enable_logo">
+                                    <div class="row mt8">
+                                        <label class="col-lg-3" string="Logo Image" for="logo_image"/>
+                                        <field name="logo_image" widget="image" class="oe_avatar"/>
+                                    </div>
+                                </setting>
+                                <setting invisible="not enable_pdf" help="Allow To Enable Header">
+                                    <field name="enable_header" string="Enable Header"/>
+                                </setting>
+                                <setting invisible="not enable_pdf or not enable_header">
+                                    <div class="row mt8">
+                                        <label class="col-lg-3" string="Header Text" for="header_text"/>
+                                        <field name="header_text"/>
+                                    </div>
+                                </setting>
+                                <setting invisible="not enable_pdf" help="Allow To Enable Footer">
+                                    <field name="enable_footer" string="Enable footer"/>
+                                </setting>
+                                <setting invisible="not enable_pdf or not enable_footer">
+                                    <div class="row mt8">
+                                        <label class="col-lg-3" string="Footer Text" for="footer_text"/>
+                                        <field name="footer_text"/>
+                                    </div>
+                                </setting>
+                            </div>
+                        </div>
+                    </block>
+                </div>
+            </xpath>
+        </field>
+    </record>
+</odoo>

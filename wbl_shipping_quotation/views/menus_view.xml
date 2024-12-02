@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- # Author      : Weblytic Labs Pvt. Ltd. (<https://store.weblyticlabs.com/>) -->
+<!-- # Copyright(c): 2023-Present Weblytic Labs Pvt. Ltd. -->
+
+
 <odoo>
-        <menuitem name="Shipping Quotation" id="shipping_quotation_root" parent="website_sale.menu_ecommerce_settings"
-              action="action_carrier_quotation_form_tree_view" sequence="500"/>
+        <menuitem name="Delivery Quotation" id="shipping_quotation_root" parent="website_sale.menu_ecommerce_settings"
+              action="action_carrier_quotation_form_tree_view" sequence="91"/>
 
 </odoo>

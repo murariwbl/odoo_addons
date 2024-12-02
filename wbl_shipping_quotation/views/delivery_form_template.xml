@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- # Author      : Weblytic Labs Pvt. Ltd. (<https://store.weblyticlabs.com/>) -->
+<!-- # Copyright(c): 2023-Present Weblytic Labs Pvt. Ltd. -->
+
 
 <odoo>
     <template id="custom_quotation_setting" inherit_id="website_sale.delivery_form">
         <xpath expr="//form[@id='o_delivery_form']" position="after">
-            <div id="custom_message" class="form-group" style="display:none; font-weight: bold; color: #555;">
+            <div id="custom_message">
             </div>
             <br></br>
             <div id="require_message_box" class="form-group" style="display:none;">
