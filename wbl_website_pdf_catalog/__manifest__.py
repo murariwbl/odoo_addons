@@ -11,7 +11,7 @@
 ##################################################################################
 
 {
-    'name': 'Download Catalog PDF',
+    'name': 'Download Catalog PDF | Catalog PDF',
     'version': '18.0.1.0.0',
     'summary': 'PDF Catalog Downloadable Product Catalog Generate PDF Catalog PDF Catalog Generation Catalog App Product Catalog Customizable Catalog Templates Odoo Catalog Management View products email download product pdf Downloadable brochure PDF management',
     'description': """PDF Catalog Downloadable Product Catalog Generate PDF Catalog PDF Catalog Generation Catalog App Product Catalog Customizable Catalog Templates Odoo Catalog Management View products email download product pdf Downloadable brochure PDF management""",
