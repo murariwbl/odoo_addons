@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- # Author      : Weblytic Labs Pvt. Ltd. (<https://store.weblyticlabs.com/>) -->
+<!-- # Copyright(c): 2023-Present Weblytic Labs Pvt. Ltd. -->
+
+<odoo>
+    <template id="wbl_product_pdf_info" inherit_id="website_sale.product">
+        <xpath expr="//div[@id='o_wsale_cta_wrapper']" position="after">
+            <!-- Retrieve both settings -->
+            <t t-set="enable_pdf" t-value="env['res.config.settings'].sudo().get_values().get('enable_pdf')"/>
+            <t t-set="enable_pdf_product"
+               t-value="env['res.config.settings'].sudo().get_values().get('enable_pdf_product')"/>
+
+            <!-- Check if both settings are enabled -->
+            <t t-if="enable_pdf and enable_pdf_product">
+                <button type="button" id="product_category_data_print" class="oe_unremovable btn btn-primary btn_cta">
+                    <a t-attf-href="/all/product/pdf" class="text-white" title="Click To Download PDF">
+                        <i class="fa fa-print"></i>
+                        PDF
+                    </a>
+                </button>
+            </t>
+        </xpath>
+    </template>
+</odoo>
+
+        <!--<odoo>-->
+        <!--    <template id="wbl_product_pdf_info" inherit_id="website_sale.product">-->
+        <!--        <xpath expr="//div[@id='o_wsale_cta_wrapper']" position="after">-->
+        <!--            <t t-set="enable_pdf" t-value="env['res.config.settings'].sudo().get_values().get('enable_pdf', 'enable_pdf_product')"/>-->
+        <!--            <t t-if="enable_pdf and enable_pdf_product">-->
+        <!--                <button type="button" id="product_category_data_print"-->
+        <!--                        class="oe_unremovable btn btn-primary btn_cta">-->
+        <!--                    <a t-attf-href="/all/product/pdf" class="text-white"-->
+        <!--                       title="Click To Download PDF">-->
+        <!--                        <i class="fa fa-print"></i>-->
+        <!--                        PDF-->
+        <!--                    </a>-->
+        <!--                </button>-->
+        <!--            </t>-->
+        <!--        </xpath>-->
+        <!--    </template>-->
+
+        <!--</odoo>-->

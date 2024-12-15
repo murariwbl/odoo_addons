@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="delivery_quote_summary" model="mail.template">
+            <field name="name">Delivery Quotation Request</field>
+            <field name="model_id" ref="wbl_shipping_quotation.model_carrier_quotation"/>
+            <field name="subject">Delivery Quotation Request for {{ object.name }}</field>
+            <field name="email_from"/>
+            <field name="email_to">{{ object.create_uid.partner_id.email }}</field>
+            <field name="description">Notification Of Delivery Quotation Request</field>
+            <field name="body_html" type="html">
+                <div>
+                    <div>
+                        <h2>Delivery Quotation Request</h2>
+                    </div>
+                    <div>
+                        <p>Hey,</p>
+                        <p>Thank you! Your Delivery Quotation Request has been created successfully.</p>
+                        <p>We will inform you once your Request is Approved.</p>
+                        <p>Best Regards</p>
+                    </div>
+                </div>
+            </field>
+        </record>
+    </data>
+
+    <data>
+        <record id="delivery_quote_summary_approved" model="mail.template">
+            <field name="name">Delivery Quotation Approved</field>
+            <field name="model_id" ref="wbl_shipping_quotation.model_carrier_quotation"/>
+            <field name="subject">Delivery Quotation Approved  {{ object.name }}</field>
+            <field name="email_from"/>
+            <field name="email_to">{{ object.create_uid.partner_id.email }}</field>
+            <field name="description">Notification Of Delivery Quotation Approved</field>
+            <field name="body_html" type="html">
+                <div>
+                    <div>
+                        <h2>Delivery Quotation Approved</h2>
+                    </div>
+                    <div>
+                        <p>Hey,</p>
+                        <p>Thank you! Your Delivery Quotation Request has been Approved successfully.</p>
+                        <p>Best Regards</p>
+                    </div>
+                </div>
+            </field>
+        </record>
+    </data>
+</odoo>

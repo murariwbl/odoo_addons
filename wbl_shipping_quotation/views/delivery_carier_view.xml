@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- # Author      : Weblytic Labs Pvt. Ltd. (<https://store.weblyticlabs.com/>) -->
+<!-- # Copyright(c): 2023-Present Weblytic Labs Pvt. Ltd. -->
+
 <odoo>
     <record id="view_delivery_carrier_buttons" model="ir.ui.view">
         <field name="name">delivery.carrier.form</field>
@@ -8,15 +11,33 @@
             <xpath expr="//page[@name='description']" position="after">
                 <page string="Quotation" name="Quotation">
                     <group>
-                        <group>
-                            <field name="enable_quotation" />
-                            <field name="require_message_box" String="Require Message Text Box" invisible="not enable_quotation"/>
+                        <group string="GENERAL SETTINGS">
+                            <field name="enable_quotation"/>
                             <field name="button_name" invisible="not enable_quotation"/>
-                             <field name="message_show" invisible="not enable_quotation"/>
-                            <field name="custom_message" invisible="not enable_quotation or not message_show"/>
+                            <field name="message_show" invisible="not enable_quotation"/>
+                            <field name="custom_message" invisible="not enable_quotation"/>
                         </group>
-                        <group>
+                        <group string="QUOTE EXPIRATION">
                             <field name="quote_expire" invisible="not enable_quotation"/>
+                        </group>
+                        <group string="QUOTE BY ORDER AMOUNT">
+                            <field name="currency_id" invisible="1"/>
+                            <field name="minimum_order_amount" widget="monetary"
+                                   options="{'currency_field': 'currency_id'}"/>
+                            <field name="is_tax_include"/>
+                        </group>
+                        <group string="QUOTE BY CALENDER">
+                            <field name="date_from"/>
+                            <field name="date_to"/>
+                        </group>
+                        <group string="QUOTE BY PRODUCTS">
+                            <field name="product_ids" widget="many2many_tags"/>
+                        </group>
+                        <group string="QUOTE BY CUSTOMERS">
+                            <field name="customer_ids" widget="many2many_tags"/>
+                        </group>
+                        <group string="QUOTE BY COUNTRY">
+                            <field name="select_country" widget="many2many_tags"/>
                         </group>
                     </group>
                 </page>

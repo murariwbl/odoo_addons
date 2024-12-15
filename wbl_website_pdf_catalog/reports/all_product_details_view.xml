@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- # Author      : Weblytic Labs Pvt. Ltd. (<https://store.weblyticlabs.com/>) -->
+<!-- # Copyright(c): 2023-Present Weblytic Labs Pvt. Ltd. -->
+
+<odoo>
+    <template id="report_product_view">
+        <t t-call="web.html_container">
+            <t t-call="web.external_layout">
+
+                <div class="page">
+
+
+                    <!-- Logo position, image, -->
+                    <t t-if="enable_logo">
+                        <div t-if="logo_position == 'left'" class="col-md-12 text-left">
+                            <img t-att-src="'data:image/png;base64,%s' % logo_image" alt="Logo"
+                                 style="max-width: 100px;"/>
+                        </div>
+                        <div t-if="logo_position == 'center'" class="col-md-12 text-center">
+                            <img t-att-src="'data:image/png;base64,%s' % logo_image" alt="Logo"
+                                 style="max-width: 100px;"/>
+                        </div>
+                        <div t-if="logo_position == 'right'" style="text-align: right;">
+                            <img t-att-src="'data:image/png;base64,%s' % logo_image" alt="Logo"
+                                 style="max-width: 100px;"/>
+                        </div>
+                    </t>
+
+                    <!-- Display Current Date -->
+                    <t t-if="display_date">
+                        <div class="col-md-12 text-center text-dark mb-4">
+                            <h5>Date:
+                                <t t-esc="current_date"/>
+                            </h5>
+                        </div>
+                    </t>
+                    <t t-if="cover_image">
+                        <div class="col-md-12 text-center" style="page-break-after: always;">
+                            <img t-att-src="'data:image/png;base64,%s' % cover_image"
+                                 style="width: 900px; height: 800px;"/>
+                        </div>
+                    </t>
+
+                    <!-- Product Details Table -->
+                    <!--                    <h3 class="text-center">Product Details</h3>-->
+
+                    <!-- Conditional Header -->
+                    <t t-if="enable_header">
+                        <div class="col-md-12 text-center text-dark mb-4">
+                            <h4>
+                                <t t-esc="header_text"/>
+                            </h4>
+                        </div>
+                    </t>
+
+                    <t t-if="products">
+                        <div class="table-container"
+                             style="page-break-inside: avoid;"> <!-- Prevent page break inside table -->
+                            <table class="table table-bordered" style="width: 80%; margin: 0 auto;">
+                                <thead>
+                                    <tr>
+                                        <th style="width: 10%;">
+                                            <h5>Image</h5>
+                                        </th>
+                                        <th style="width: 20%;">
+                                            <h5>Product Name</h5>
+                                        </th>
+                                        <th style="width: 40%;">
+                                            <h5>Description</h5>
+                                        </th>
+                                        <th style="width: 15%;">
+                                            <h5>Price</h5>
+                                        </th>
+                                        <th style="width: 40%;">
+                                            <h5>Attributes</h5>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <t t-foreach="products" t-as="product">
+                                        <tr style="page-break-inside: avoid;"> <!-- Ensure no row break between pages -->
+                                            <td class="td-img ps-0">
+                                                <t t-if="product['image']">
+                                                    <img t-att-src="'data:image/png;base64,' + product['image']"
+                                                         class="img o_image_64_max rounded"
+                                                         style="width: 80px; height: 80px;"/>
+                                                </t>
+                                                <t t-else="">
+                                                    <img class="img o_image_64_max rounded"
+                                                         style="width: 80px; height: 80px;"/>
+                                                </t>
+                                            </td>
+                                            <!-- Product Name -->
+                                            <td>
+                                                <t t-esc="product['name']"/>
+                                            </td>
+
+                                            <!-- Product Description -->
+                                            <td>
+                                                <t t-esc="product['description']"/>
+                                            </td>
+
+                                            <!-- Product Price -->
+                                            <td style="text-align: right;">
+                                                <t t-esc="product['currency_symbol']"/>
+                                                <t t-esc="product['price']"/>
+                                            </td>
+                                            <!-- Product Attributes -->
+                                            <td>
+                                                <t t-if="product['attributes']">
+                                                    <ul style="padding-left: 10px;">
+                                                        <t t-foreach="product['attributes']" t-as="attr">
+                                                            <li>
+                                                                <strong><t t-esc="attr['attribute']"/>:
+                                                                </strong>
+                                                                <t t-esc="attr['value']"/>
+                                                            </li>
+                                                        </t>
+                                                    </ul>
+                                                </t>
+                                            </td>
+                                        </tr>
+                                    </t>
+                                </tbody>
+                            </table>
+                        </div>
+                    </t>
+
+                    <!-- Conditional Footer -->
+                    <t t-if="enable_footer">
+                        <div class="col-md-12 text-center text-dark mt-4">
+                            <h4>
+                                <t t-esc="footer_text"/>
+                            </h4>
+                        </div>
+                    </t>
+                </div>
+            </t>
+        </t>
+    </template>
+</odoo>
